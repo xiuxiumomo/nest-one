@@ -1,4 +1,5 @@
 import { Module } from "@nestjs/common";
+// 环境配置
 
 //mysql模块
 import { TypeOrmModule } from "@nestjs/typeorm";
@@ -11,27 +12,27 @@ import "winston-daily-rotate-file";
 //自己的crud模块
 import { TagsModule } from "./modules/tags/tags.module";
 import { ArticleModule } from "./modules/article/article.module";
+//全局配置文件
+import { getLogCongfig, mysqlConfig, redisConfig } from "../config/index.config";
 
-//配置文件
-import { getLogCongfig } from "./config/index";
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: "mysql",
-      host: "localhost",
-      port: 3306,
-      username: "root",
-      password: "123456",
-      database: "note-one",
+      host: mysqlConfig.host,
+      port: mysqlConfig.port,
+      username: mysqlConfig.username,
+      password: mysqlConfig.password,
+      database: mysqlConfig.database,
       entities: ["dist/modules/**/*.entity{.ts,.js}"],
       synchronize: true,
     }),
 
     RedisModule.forRoot({
       type: "single",
-      url: "redis://144.34.181.43:6380",
+      url: redisConfig.url,
       options: {
-        password: "xiuxiumomo",
+        password: redisConfig.password,
       },
     }),
     WinstonModule.forRoot(getLogCongfig(winston)),

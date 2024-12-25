@@ -1,3 +1,7 @@
+import * as config from "config";
+export const mysqlConfig = config.get("mysql");
+export const redisConfig = config.get("redis");
+
 //日志配置
 export const getLogCongfig = (winston) => {
   return {
