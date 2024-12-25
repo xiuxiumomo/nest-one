@@ -1,0 +1,25 @@
+// vscode/settings.json写入
+
+{
+  "eslint.options": {
+    "extensions": [".js", ".vue"]
+  },
+  "editor.formatOnSave": true,
+  "eslint.validate": ["javascript", "vue"],
+  "stylelint.validate": ["css", "less", "scss", "sass", "html", "vue"],
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "eslint.autoFixOnSave": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "json.schemaDownload.enable": false,
+  "editor.inlineSuggest.showToolbar": "always",
+
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}
