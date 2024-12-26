@@ -12,6 +12,8 @@ export class TagsController {
 
   @Post("create")
   create(@Body() createTagDto: CreateTagDto) {
+    //{ name: '1' } 控制器过来的参数
+    console.log(createTagDto, "控制器过来的参数");
     return this.tagsService.create(createTagDto);
   }
 

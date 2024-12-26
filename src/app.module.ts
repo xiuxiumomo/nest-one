@@ -24,7 +24,7 @@ import { getLogCongfig, mysqlConfig, redisConfig } from "../config/index.config"
       username: mysqlConfig.username,
       password: mysqlConfig.password,
       database: mysqlConfig.database,
-      entities: ["dist/modules/**/*.entity{.ts,.js}"],
+      entities: ["dist/src/modules/**/*.entity{.ts,.js}"],
       synchronize: true,
     }),
 

@@ -1,0 +1,15 @@
+{
+  "mysql": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "username": "root",
+    "password": "123456",
+    "database": "nest-one",
+    "message": "This is a message from the development.json file"
+  },
+  "redis": {
+    "url": "redis://144.34.181.43:6380",
+    "port": 6380,
+    "password": "xiuxiumomo"
+  }
+}

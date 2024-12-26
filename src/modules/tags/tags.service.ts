@@ -18,6 +18,7 @@ export class TagsService {
   ) {}
   async create(createTagDto: CreateTagDto) {
     const hasTag = await this.tagsRepository.findOneBy({ name: createTagDto.name });
+
     if (hasTag) {
       throw new NotFoundException("标签已存在");
     }
@@ -33,19 +34,22 @@ export class TagsService {
 
   async findAll(listTagDto: ListTagDto) {
     const { pageIndex = 1, pageSize = 10, id } = listTagDto;
+    try {
+      const query = this.tagsRepository
+        .createQueryBuilder("tag")
+        .skip((pageIndex - 1) * pageSize)
+        .take(pageSize);
 
-    const query = this.tagsRepository
-      .createQueryBuilder("tag")
-      .skip((pageIndex - 1) * pageSize)
-      .take(pageSize);
+      if (id) {
+        query.andWhere("tag.id = :id", { id });
+      }
 
-    if (id) {
-      query.andWhere("tag.id = :id", { id });
+      const res = await query.getMany();
+      this.redis.set("tags", JSON.stringify(res));
+      return res;
+    } catch (error) {
+      console.log(error);
     }
-
-    const res = await query.getMany();
-
-    return res;
   }
 
   update(id: number, updateTagDto: UpdateTagDto) {
